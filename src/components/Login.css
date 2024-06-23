@@ -1,0 +1,48 @@
+.login-page {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: #212121;
+}
+
+.login-container {
+    background-color: rgb(211, 206, 206);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    width: 300px;
+}
+.login-container h2 {
+    text-align: center;
+    font-weight: bolder;
+}
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+ .form-group input, select 
+ { 
+    width: 100%;
+    padding: 5px;
+    margin-top: 1px;
+    margin-bottom: 8px;
+}
+
+ .btn-login{
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 8px;
+}

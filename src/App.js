@@ -1,24 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router,Route, Routes,} from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Books from "./components/Books";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import Addstudent from "./components/Addstudent";
+import { useEffect, useState } from "react";
+import Logout from "./components/Logout";
+import axios from 'axios';
+import Addbook from "./components/Addbook";
+import EditBook from "./components/EditBook";
+import Delete from "./components/Delete";
+import { baseUrl } from "./urls";
 
 function App() {
+  const [role, setRole] = useState()
+
+  axios.defaults.withCredentials = true ;
+  useEffect(() => {
+    axios.get(`${baseUrl}/auth/verify`,{ withCredentials: true })
+    .then(res => {
+      if(res.data.login){
+        setRole(res.data.role)
+      }else {
+        setRole("")
+      }
+      console.log(res)
+    }).catch(err => console.log(err));
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar  role={role}/>
+      <Routes>
+        <Route path="/" element={<Home/>}></Route>
+        <Route path="/books" element={<Books role={role}/>}></Route>
+        <Route path="/login" element={<Login setRoleVar={setRole}/>}></Route>
+        <Route path="/dashboard" element={<Dashboard/>}></Route>
+        <Route path="/addstudent" element={<Addstudent/>}></Route>
+        <Route path="/logout" element={<Logout setRole={setRole}/>}></Route>
+        <Route path="/addbook" element={<Addbook/>}></Route>
+        <Route path="/book/:id" element={<EditBook/>}></Route>
+        <Route path="/delete/:id" element={<Delete/>}></Route>☻
+      </Routes>
+    </Router>
   );
 }
 
